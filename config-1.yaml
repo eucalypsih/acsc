@@ -11,7 +11,7 @@ dns:
   ipv6: false
   enhanced-mode: fake-ip
   nameserver:
-    - 112.215.203.254
+    - '1.1.1.1'
 
 proxies:
   - {'name': '🇸🇬SG', 'type': 'vless', 'server': 'space.byu.id', 'port': 443, 'uuid': '5ef9a1c1-c88d-47f7-ad9e-03346157acf9', 'alterId': 0, 'cipher': 'auto', 'tls': True, 'skip-cert-verify': True, 'servername': 'sg1-xray.greenssh.xyz', 'network': 'ws', 'ws-opts': {'path': '/vless-ws', 'headers': {'Host': 'sg1-xray.greenssh.xyz'}}, 'udp': True}
