@@ -14,7 +14,7 @@ dns:
     - 112.215.203.254
 
 proxies:
-  - {'name': 'ðŸ‡¸ðŸ‡¬SG-119.36.161.40-0010', 'type': 'vless', 'server': 'space.byu.id', 'port': 443, 'uuid': '5ef9a1c1-c88d-47f7-ad9e-03346157acf9', 'alterId': 0, 'cipher': 'auto', 'tls': True, 'skip-cert-verify': True, 'servername': 'sg1-xray.greenssh.xyz', 'network': 'ws', 'ws-opts': {'path': '/vless-ws', 'headers': {'Host': 'sg1-xray.greenssh.xyz'}}, 'udp': True}
+  - {'name': '🇸🇬SG', 'type': 'vless', 'server': 'space.byu.id', 'port': 443, 'uuid': '5ef9a1c1-c88d-47f7-ad9e-03346157acf9', 'alterId': 0, 'cipher': 'auto', 'tls': True, 'skip-cert-verify': True, 'servername': 'sg1-xray.greenssh.xyz', 'network': 'ws', 'ws-opts': {'path': '/vless-ws', 'headers': {'Host': 'sg1-xray.greenssh.xyz'}}, 'udp': True}
 
 proxy-groups:
   - name: TraficSG
@@ -22,7 +22,7 @@ proxy-groups:
     strategy: round-robin
     disable-udp: false
     proxies:
-      - 'ðŸ‡¸ðŸ‡¬SG-119.36.161.40-0010'
+      - '🇸🇬SG'
       - DIRECT
     url: http://www.gstatic.com/generate_204
     interval: 360
