@@ -1,0 +1,30 @@
+ipv6: false
+mode: rule
+log-level: debug
+allow-lan: false
+external-controller: 127.0.0.1:9090
+unified-delay: true
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  nameserver:
+    - 112.215.203.254
+
+proxies:
+  - {'name': 'ðŸ‡¸ðŸ‡¬SG-119.36.161.40-0010', 'type': 'vless', 'server': 'space.byu.id', 'port': 443, 'uuid': '5ef9a1c1-c88d-47f7-ad9e-03346157acf9', 'alterId': 0, 'cipher': 'auto', 'tls': True, 'skip-cert-verify': True, 'servername': 'sg1-xray.greenssh.xyz', 'network': 'ws', 'ws-opts': {'path': '/vless-ws', 'headers': {'Host': 'sg1-xray.greenssh.xyz'}}, 'udp': True}
+
+proxy-groups:
+  - name: TraficSG
+    type: select
+    strategy: round-robin
+    disable-udp: false
+    proxies:
+      - ðŸ‡¸ðŸ‡¬SG-119.36.161.40-0010
+      - DIRECT
+    url: http://www.gstatic.com/generate_204
+    interval: 360
+
+rules:
+  - DOMAIN-SUFFIX,mintegral.com,REJECT,no-resolve
+  - MATCH,TraficSG
