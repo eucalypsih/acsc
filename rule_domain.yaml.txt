@@ -89,6 +89,7 @@ payload:
 - "rt.applvn.com"
 - "a4.applovin.com"
 - "analytics-tcp.mintegral.net"
+- "hybird.rayjump.com"
 - "play.rayjump.com"
 - "sg01-cdn.rayjump.com"
 - "sg01.rayjump.com"
