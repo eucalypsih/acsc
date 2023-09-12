@@ -1,0 +1,89 @@
+## 1.1.1.1
+## 8.8.8.8
+## 9.9.9.9
+## 223.5.5.5
+## 45.90.28.57
+## 112.215.203.254
+## 114.114.114.114
+## 119.29.29.29
+## https://doh.pub/dns-query
+## https://cloudflare-dns.com/dns-query
+## https://dns.google/dns-query
+## https://1.1.1.1/dns-query
+## tls://dns.google:853
+##
+##
+#port: 7890
+#socks-port: 7891
+#redir-port: 7892
+mixed-port: 10808
+#tproxy-port: 7895
+ipv6: false
+mode: rule
+log-level: info
+allow-lan: false
+#external-controller: 127.0.0.1:9090
+#secret: "12345"
+#bind-address: "*"
+unified-delay: true
+#profile:
+#  store-selected: true
+#  store-fake-ip: true
+dns:
+  enable: true
+  enabled: true
+  ipv6: false
+#  use-host: true
+  enhanced-mode: fake-ip
+#  listen: 0.0.0.0:7874
+  nameserver:
+    - 223.5.5.5
+    - https://dns.twnic.tw/dns-query
+    - tls://dns.rubyfish.cn:853
+#  default-nameserver:
+#    - 1.1.1.1
+#  fake-ip-range: 198.18.0.1/16
+#  fake-ip-filter:
+#   - "*.lan"
+#   - "*.localdomain"
+#   - "*.example"
+#   - "*.invalid"
+#   - "*.localhost"
+
+proxies:
+##  - {'name':'🇸🇬SG-garena_ss_pot-sg1_greenssh','type':'ss','server':'sg01.proxysocks.xyz','port':1443,'password':'MWRkZ','cipher':'chacha20-ietf-poly1305','plugin':'obfs','plugin-opts':{'mode':'tls','tls':true,'host':'dl.kgvn.garenanow.com'},'udp':true}
+##  - {'name': '🇸🇬SG-AF_SS_pvwtr-SG1_GlobalSSH', 'type': 'ss', 'server': 'ss-ctb-sg01.globalssh.xyz', 'port': 443, 'password': 'GlobalSSHPremiumShadow==:NmARebGalH1+5KkjJ1fx6g==', 'cipher': '2022-blake3-aes-128-gcm', 'plugin': 'v2ray-plugin', 'plugin-opts': {'mode': 'websocket', 'tls': True, 'skip-cert-verify': True, 'host': 'dl.kgvn.garenanow.com', 'path': '/shadow-ws', 'mux': False}}
+  - {'name': '🇸🇬SG-BYU_SS_pvwtr-SG1_GlobalSSH', 'type': 'ss', 'server': 'space.byu.id', 'port': 443, 'password': 'GlobalSSHPremiumShadow==:NmARebGalH1+5KkjJ1fx6g==', 'cipher': '2022-blake3-aes-128-gcm', 'plugin': 'v2ray-plugin', 'plugin-opts': {'mode': 'websocket', 'tls': True, 'skip-cert-verify': True, 'host': 'ss-ctb-sg01.globalssh.xyz', 'path': '/shadow-ws', 'mux': False}}
+
+proxy-groups:
+  - name: TraficSG
+    type: select
+    strategy: round-robin
+    disable-udp: false
+    proxies:
+      - 🇸🇬SG-BYU_SS_pvwtr-SG1_GlobalSSH
+      - DIRECT
+    url: http://www.gstatic.com/generate_204
+    interval: 360
+
+rule-providers:
+  rule_allow:
+    type: file
+    behavior: domain
+    path: "./rule_allow.yaml"
+  rule_lancidr:
+    type: http
+    behavior: ipcidr
+#    url: https://raw.githubusercontent.com/malikshi/open_clash/main/rule_provider/rule_lancidr.yaml
+    path: "./rule_lancidr.yaml"
+    interval: 86400
+  rule_block:
+    type: file
+    behavior: domain
+    path: "./rule_block.yaml"
+
+rules:
+  - RULE-SET,rule_allow,TraficSG
+  - RULE-SET,rule_lancidr,DIRECT,no-resolve
+  - RULE-SET,rule_block,REJECT,no-resolve
+  - MATCH,TraficSG
