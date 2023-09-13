@@ -1,15 +1,21 @@
 payload:
+- "ajs-assets.ftstatic.com"
+- "servedby.flashtalking.com"
+- "sejs.moatads.com" # LOW
+- "cache-ssl.celtra.io" # LOW
 - "sb.scorecardresearch.com"
 - "tracker.samplicio.us"
 - "hubble-02.tmmp.io"
+- "mf26.mobfox.com"
 - "mf18.mobfox.com"
+- "cs.mobfox.com"
 - "c.tpbid.com"
 - "view.adjust.com"
 - "tnc16-alisg.isnssdk.com"
-- "creative-cdn77.bidease.com"
 - "kinesis.us-east-1.amazonaws.com"
 - "match.prod.bidr.io"
 - "us-west-2.event.prod.bidr.io"
+- "sdk.s.360.cn"
 - "psp.cloud.360shouji.com"
 - "default-cluster.push.cloud-en.360shouji.com"
 - "appupdate.cloud-en.360os.com"
@@ -17,6 +23,8 @@ payload:
 - "api-en.os.qiku.com"
 - "api16-log-sg2.pangle.io" # HIGH
 - "onesoft.com.vn" # HIGH
+- "jnn-pa.googleapis.com"
+- "nearbysharing-pa.googleapis.com"
 - "safebrowsing.googleapis.com"
 - "vst.c.appier.net"
 - "ad.appier.net"
@@ -29,6 +37,7 @@ payload:
 - "dis.criteo.com"
 - "cdn.admaxim.com"
 - "b1sync.zemanta.com"
+- "imp-lb-us2.jampp.com"
 - "cdn.jampp.com"
 - "imgx.jampp.com"
 - "p16-sign-sg.tiktokcdn.com"
@@ -69,6 +78,8 @@ payload:
 - "googleads4.g.doubleclick.net"
 - "googleads.g.doubleclick.net"
 - "android.apis.google.com"
+- "track-us.bidease.com"
+- "creative-bunny.bidease.com"
 - "creative-cdn77.bidease.com"
 - "dc.holalauncher.com"
 - "v.holalauncher.com"
