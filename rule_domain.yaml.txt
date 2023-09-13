@@ -81,6 +81,7 @@ payload:
 - "ms.applvn.com"
 - "ms4.applovin.com"
 - "ms4.applvn.com"
+- "prod-bid.applovin.com"
 - "prod-a4.applovin.com"
 - "res1.applovin.com"
 - "img.applovin.com"
