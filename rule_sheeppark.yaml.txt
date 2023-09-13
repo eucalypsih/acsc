@@ -6,6 +6,7 @@ payload:
 - "cdn-adn-gcp.rayjump.com"
 - "de01.rayjump.com"
 - "us01.rayjump.com"
+- "sg01-cdn.rayjump.com"
 - "sg01.rayjump.com"
 ## - "net.rayjump.com"
 - "+.360os.com"
