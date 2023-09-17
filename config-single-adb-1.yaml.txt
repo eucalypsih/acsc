@@ -372,7 +372,7 @@ rules:
   - DOMAIN,vg-aws-cdn-us-east-1b-hb.rayjump.com,REJECT
   - DOMAIN,vg-aws-cdn-us-east-1a-hb.rayjump.com,REJECT
   - DOMAIN,vg-new-hb.rayjump.com,REJECT # HIGH-GAME
-- DOMAIN,se-new-cdn-ap-northeast-2a-hb.rayjump.com,REJECT
+  - DOMAIN,se-new-cdn-ap-northeast-2a-hb.rayjump.com,REJECT
   - DOMAIN,cdn-adn-gcp.rayjump.com,REJECT
   - DOMAIN,de01.rayjump.com,REJECT
   - DOMAIN,us01.rayjump.com,REJECT
