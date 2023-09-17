@@ -1,7 +1,7 @@
-port: 7890
-socks-port: 7891
-redir-port: 7892
-mixed-port: 10808
+#port: 7890
+#socks-port: 7891
+#redir-port: 7892
+#mixed-port: 7896
 #tproxy-port: 7895
 ipv6: false
 mode: rule
@@ -218,7 +218,7 @@ rules:
 ##- DOMAIN,tnc16-useast1a.byteoversea.com,REJECT
 ##- DOMAIN,mssdk-sg-bu.byteoversea.com,REJECT
 ##- DOMAIN,tnc16-alisg.byteoversea.com,REJECT
-##- DOMAIN-KEYWORD,.byteoversea.com
+##- DOMAIN-KEYWORD,.byteoversea.com,REJECT
 ##- DOMAIN,b6b5p6y2.ssl.hwcdn.net,REJECT
 ##- DOMAIN,ajs-assets.ftstatic.com,REJECT
 ##- DOMAIN,servedby.flashtalking.com,REJECT
@@ -273,10 +273,10 @@ rules:
 ##- DOMAIN,imageproxy.eu.criteo.net,REJECT
 ##- DOMAIN,static.criteo.net,REJECT
 ##- DOMAIN,widget.sg1.as.criteo.com,REJECT
-##- DOMAIN,ads.as.criteo.com
+##- DOMAIN,ads.as.criteo.com,REJECT
 ##- DOMAIN,ads.eu.criteo.com,REJECT
 ##- DOMAIN,dis.criteo.com,REJECT
-##- DOMAIN-KEYWORD,.criteo.com # LOW
+##- DOMAIN-KEYWORD,.criteo.com,REJECT # LOW
 ##- DOMAIN,cdn.admaxim.com,REJECT
 ##- DOMAIN,b1sync.zemanta.com,REJECT
 ##- DOMAIN,imp-lb-us2.jampp.com,REJECT
@@ -362,7 +362,7 @@ rules:
   - DOMAIN,tknet-cdn.rayjump.com,REJECT
   - DOMAIN,hybird.rayjump.com,REJECT
   - DOMAIN,play.rayjump.com,REJECT
-  - DOMAIN,sg01-cdn.rayjump.com,REJECT
+##- DOMAIN,sg01-cdn.rayjump.com,REJECT
   - DOMAIN,sg01.rayjump.com,REJECT
 ##- DOMAIN,"ir-new-cdn-eu-west-1b-hb.rayjump.com,REJECT
 ##- DOMAIN,"ir-new-cdn-eu-west-1a-hb.rayjump.com,REJECT
@@ -381,7 +381,7 @@ rules:
   - DOMAIN,net-vg.rayjump.com,REJECT
   - DOMAIN,net-sg-cdn.rayjump.com,REJECT
   - DOMAIN,us01-cdn.rayjump.com,REJECT
-  - DOMAIN,adx-tk.rayjump.com,REJECT
+##- DOMAIN,adx-tk.rayjump.com,REJECT
   - DOMAIN,configure-tcp-android.rayjump.com,REJECT
   - DOMAIN,net.rayjump.com,REJECT # LOW
 ##- DOMAIN-KEYWORD,.rayjump.com,REJECT
