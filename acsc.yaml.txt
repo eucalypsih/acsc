@@ -5,10 +5,14 @@ proxies:
 # SG-BYU_SS_pot-SG1MBC_GlobalSSH
   - {'name': '🍩', 'type': 'ss', 'server': 'mbc-sg01.ipss.xyz', 'port': 1443, 'password': 'sobatgs', 'cipher': 'aes-128-gcm', 'plugin': 'obfs', 'plugin-opts': {'mode': 'tls', 'tls': True, 'host': 'space.byu.id'}, 'udp': True}
 
+
+# SGOVH-BYU_SS_pvwtr-SG2OVH_GlobalSSH
+  - {'name': '🍩', 'type': 'ss', 'server': 'space.byu.id', 'port': 443, 'password': 'GlobalSSHPremiumShadow==:Yg8c8IlBpcIM7UmKWktukQ==', 'cipher': '2022-blake3-aes-128-gcm', 'plugin': 'v2ray-plugin', 'plugin-opts': {'mode': 'websocket', 'tls': True, 'skip-cert-verify': True, 'host': 'ss-ovh-sg02.globalssh.xyz', 'path': '/shadow-ws', 'mux': False}, 'udp': True}
+
 # SG-BYU_SS_pvwtr-SG1_GlobalSSH
   - {'name': '🍩', 'type': 'ss', 'server': 'space.byu.id', 'port': 443, 'password': 'GlobalSSHPremiumShadow==:b9r6X1SBzpxlL/FgTKGIEQ==', 'cipher': '2022-blake3-aes-128-gcm', 'plugin': 'v2ray-plugin', 'plugin-opts': {'mode': 'websocket', 'tls': True, 'skip-cert-verify': True, 'host': 'ss-ovh-sg01.globalssh.xyz', 'path': '/shadow-ws', 'mux': False}, 'udp': True}
 
-# SG-BYU_VM_pvwtr-SG2_SSHOcean
+# SG-BYU_VM_pnwtr-SG2_SSHOcean
   - {'name': '🍩', 'type': 'vmess', 'server': 'space.byu.id', 'port': 443, 'uuid': 'e4ded580-8c14-469e-9827-5b2181521b72', 'alterId': '0', 'cipher': 'auto', 'tls': True, 'skip-cert-verify': True, 'servername': 'sg2.xv2ray.net', 'network': 'ws', 'ws-opts': {'path': '/vmess', 'headers': {'Host': 'sg2.xv2ray.net'}, 'mux': False}, 'udp': True}
   - name: sshocean-mayuriku
     server: sg2.xv2ray.net
@@ -26,3 +30,24 @@ proxies:
       headers:
         Host: sg2.xv2ray.net
     udp: true
+
+# SG-BYU_VM_pnwtr-SG2OVH_GlobalSSH
+  - {'name': '🍩', 'type': 'vmess', 'server': 'space.byu.id', 'port': 443, 'uuid': 'c482ab14-2b1c-4d20-bde2-208315c77807', 'alterId': '0', 'cipher': 'auto', 'tls': True, 'skip-cert-verify': True, 'servername': 'vmess-ovh-sg02.globalssh.xyz', 'network': 'ws', 'ws-opts': {'path': '/vmess', 'headers': {'Host': 'vmess-ovh-sg02.globalssh.xyz'}, 'mux': False}, 'udp': True}
+  - name: sshocean-mayuriku
+    server: sg2.xv2ray.net
+    port: 443
+    type: vmess
+    uuid: e4ded580-8c14-469e-9827-5b2181521b72
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: www.freefiremobile.com
+    network: ws
+    ws-opts:
+      path: /vmess
+      headers:
+        Host: sg2.xv2ray.net
+    udp: true
+
+
