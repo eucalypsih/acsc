@@ -232,20 +232,20 @@ proxy-groups:
     interval: 100
 
 rules:
-  - IP-CIDR,0.0.0.0/8,DIRECT,no-resolve
-  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
-  - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
-  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
-  - IP-CIDR,169.254.0.0/16,DIRECT,no-resolve
-  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
-  - IP-CIDR,192.0.0.0/24,DIRECT,no-resolve
-  - IP-CIDR,192.0.2.0/24,DIRECT,no-resolve
-  - IP-CIDR,192.88.99.0/24,DIRECT,no-resolve
-  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
-  - IP-CIDR,198.18.0.0/15,DIRECT,no-resolve
-  - IP-CIDR,198.51.100.0/24,DIRECT,no-resolve
-  - IP-CIDR,203.0.113.0/24,DIRECT,no-resolve
-  - IP-CIDR,224.0.0.0/3,DIRECT,no-resolve
+  - IP-CIDR,0.0.0.0/8,♻️,no-resolve
+  - IP-CIDR,10.0.0.0/8,♻️,no-resolve
+  - IP-CIDR,100.64.0.0/10,♻️,no-resolve
+  - IP-CIDR,127.0.0.0/8,♻️,no-resolve
+  - IP-CIDR,169.254.0.0/16,♻️,no-resolve
+  - IP-CIDR,172.16.0.0/12,♻️,no-resolve
+  - IP-CIDR,192.0.0.0/24,♻️,no-resolve
+  - IP-CIDR,192.0.2.0/24,♻️,no-resolve
+  - IP-CIDR,192.88.99.0/24,♻️,no-resolve
+  - IP-CIDR,192.168.0.0/16,♻️,no-resolve
+  - IP-CIDR,198.18.0.0/15,♻️,no-resolve
+  - IP-CIDR,198.51.100.0/24,♻️,no-resolve
+  - IP-CIDR,203.0.113.0/24,♻️,no-resolve
+  - IP-CIDR,224.0.0.0/3,♻️,no-resolve
   - IP-CIDR,::1/128,DIRECT,no-resolve
   - IP-CIDR,fc00::/7,DIRECT,no-resolve
   - IP-CIDR,fe80::/10,DIRECT,no-resolve
@@ -256,30 +256,30 @@ rules:
   - DOMAIN-KEYWORD,duckduckgo.,🛑
   - DOMAIN,api.sheeppark.com,♻️
   - DOMAIN,2dokpo-cdn-settings.appsflyersdk.com,♻️
-  - DOMAIN,api.bytegle.site,🛑
-  - DOMAIN,gdl.bytegle.tech,🛑
+  - DOMAIN,api.bytegle.site,♻️
+  - DOMAIN,gdl.bytegle.tech,♻️
   - DOMAIN,api16-access-sg.pangle.io,♻️ #🛑
   - DOMAIN,graph.facebook.com,♻️
   - DOMAIN,ms.applovin.com,♻️
   - DOMAIN,sf16-static.i18n-pglstatp.com,♻️
-  - DOMAIN,analytics-tcp.mintegral.net,♻️
-  - DOMAIN,playable.mintegral.com,♻️
-  - DOMAIN,configure-tcp-android.rayjump.com,♻️
+  - DOMAIN,analytics-tcp.mintegral.net,🛑
+  - DOMAIN,playable.mintegral.com,🛑
+  - DOMAIN,configure-tcp-android.rayjump.com,🛑
   - DOMAIN,p.sheeppark.com,♻️
-  - DOMAIN,configure.rayjump.com,♻️
-  - DOMAIN,analytics.rayjump.com,♻️
-  - DOMAIN,se-new-cdn-ap-northeast-2c-hb.rayjump.com,♻️
-  - DOMAIN,se-new-cdn-ap-northeast-2a-hb.rayjump.com,♻️
-  - DOMAIN,cdn-adn-gcp.rayjump.com,♻️
+  - DOMAIN,configure.rayjump.com,🛑
+  - DOMAIN,analytics.rayjump.com,🛑
+  - DOMAIN,se-new-cdn-ap-northeast-2c-hb.rayjump.com,🛑
+  - DOMAIN,se-new-cdn-ap-northeast-2a-hb.rayjump.com,🛑
+  - DOMAIN,cdn-adn-gcp.rayjump.com,🛑
   - DOMAIN,hybird.rayjump.com,♻️
   - DOMAIN,play.rayjump.com,🛑
   - DOMAIN,sg01-cdn.rayjump.com,🛑
   - DOMAIN,net-se-cdn.rayjump.com,♻️
-  - DOMAIN,net.rayjump.com,♻️ # LOW
-  - DOMAIN,mtg-h5.rayjump.com,🛑
+  - DOMAIN,net.rayjump.com,🛑 # LOW
+  - DOMAIN,mtg-h5.rayjump.com,♻️
   - DOMAIN,cdn-adn-https.rayjump.com,🛑
   - DOMAIN,2.android.pool.ntp.org,🛑 # 1♻️
-  - DOMAIN,iotapi.adups.com,🛑
+  - DOMAIN,iotapi.adups.com,♻️
   - DOMAIN,geller-pa.googleapis.com,♻️
   - DOMAIN,storage.googleapis.com,♻️
   - DOMAIN,cloudconfig.googleapis.com,♻️
@@ -488,7 +488,7 @@ rules:
   - DOMAIN,policy-tcp.rayjump.com,♻️
   - DOMAIN,tknet.rayjump.com,🛑
   - DOMAIN,tknet-cdn.rayjump.com,🛑
-  - DOMAIN,sg01.rayjump.com,🛑
+  - DOMAIN,sg01.rayjump.com,♻️
   - DOMAIN,ir-new-cdn-eu-west-1b-hb.rayjump.com,♻️
   - DOMAIN,ir-new-cdn-eu-west-1a-hb.rayjump.com,♻️
   - DOMAIN,ir-new-cdn-eu-west-1c-hb.rayjump.com,♻️
@@ -496,8 +496,8 @@ rules:
   - DOMAIN,vg-aws-cdn-us-east-1b-hb.rayjump.com,🛑
   - DOMAIN,vg-aws-cdn-us-east-1a-hb.rayjump.com,🛑
   - DOMAIN,vg-new-hb.rayjump.com,🛑 # HIGH-GAME
-  - DOMAIN,de01.rayjump.com,🛑
-  - DOMAIN,us01.rayjump.com,🛑
+  - DOMAIN,de01.rayjump.com,♻️
+  - DOMAIN,us01.rayjump.com,♻️
   - DOMAIN,net-ir-cdn.rayjump.com,🛑
   - DOMAIN,net-vg.rayjump.com,🛑
   - DOMAIN,net-sg-cdn.rayjump.com,🛑
