@@ -1,14 +1,14 @@
-#port: 7890
-#socks-port: 7891
-#redir-port: 7892
-#mixed-port: 7896
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
 #tproxy-port: 7895
 ipv6: false
 mode: rule
 log-level: info
 allow-lan: false
-#external-controller: 127.0.0.1:9090
-#secret: "12345"
+external-controller: 0.0.0.0:9090
+secret: ""
 bind-address: "*"
 unified-delay: true
 profile:
@@ -28,7 +28,7 @@ dns:
   ipv6: false
   use-hosts: true
   enhanced-mode: fake-ip
-  listen: 127.0.0.1:1053
+  listen: 127.0.0.1:7874
   nameserver:
     - 223.5.5.5
     - 119.29.29.29
@@ -58,14 +58,30 @@ dns:
 #    - tls://dns.rubyfish.cn:853 # 175.24.154.66  
 #  fallback:
 #    - https://dns.google/dns-query
-#  fallback-filter:
-#    geoip: false
-#    geoip-code: CN
-#    ipcidr:
-#      - 240.0.0.0/4
-#      - 0.0.0.0/32
-#    domain:
-#      - '+.liftoff.io'
+  fallback-filter:
+    geoip: false
+    geoip-code: CN
+    ipcidr:
+      - 0.0.0.0/8
+      - 10.0.0.0/8
+      - 100.64.0.0/10
+      - 127.0.0.0/8
+      - 169.254.0.0/16
+      - 172.16.0.0/12
+      - 192.0.0.0/24
+      - 192.0.2.0/24
+      - 192.88.99.0/24
+      - 192.168.0.0/16
+      - 198.18.0.0/15
+      - 198.51.100.0/24
+      - 203.0.113.0/24
+      - 224.0.0.0/4
+      - 240.0.0.0/4
+      - 255.255.255.255/32
+    domain:
+      - 'se-new-cdn-ap-northeast-2c-hb.rayjump.com'
+      - 'se-new-cdn-ap-northeast-2a-hb.rayjump.com'
+      - '+.*'
 #  default-nameserver:
 #    - 1.1.1.1
   fake-ip-range: 198.18.0.1/16
@@ -164,24 +180,45 @@ dns:
     - +.media.dssott.com
 
 proxies:
-  - {'name': '🍩SG-FF_SS_pot-SG1_GreenSSH', 'type': 'ss', 'server': 'sg01.proxysocks.xyz', 'port': 1443, 'password': 'OTlmY', 'cipher': 'chacha20-ietf-poly1305', 'plugin': 'obfs', 'plugin-opts': {'mode': 'tls', 'tls': True,'host': 'www.freefiremobile.com'}, 'udp': true}
+#  - {'name': '🍩SG-FF_SS_pot-SG1_GreenSSH', 'type': 'ss', 'server': 'sg01.proxysocks.xyz', 'port': 1443, 'password': 'OTlmY', 'cipher': 'chacha20-ietf-poly1305', 'plugin': 'obfs', 'plugin-opts': {'mode': 'tls', 'tls': True,'host': 'space.byu.id'}, 'udp': true}
+# domain=www.freefiremobile.com
+
+#  - {'name': '🍩', 'type': 'vmess', 'server': 'sg2.xv2ray.net', 'port': 443, 'uuid': 'e4ded580-8c14-469e-9827-5b2181521b72', 'alterId': '0', 'cipher': 'auto', 'tls': True, 'skip-cert-verify': True, 'servername': 'sg2.xv2ray.net', 'network': 'ws', 'ws-opts': {'path': '/vmess', 'headers': {'Host': 'www.freefiremobile.com'}, 'mux': False}, 'udp': True}
+
+# SGOVH-BYU_SS_pvwtr-SG2OVH_GlobalSSH
+  - {'name': '🍩SGOVH-BYU_SS_pvwtr-SG2OVH_GlobalSSH', 'type': 'ss', 'server': 'space.byu.id', 'port': 443, 'password': 'GlobalSSHPremiumShadow==:Yg8c8IlBpcIM7UmKWktukQ==', 'cipher': '2022-blake3-aes-128-gcm', 'plugin': 'v2ray-plugin', 'plugin-opts': {'mode': 'websocket', 'tls': True, 'skip-cert-verify': True, 'host': 'ss-ovh-sg02.globalssh.xyz', 'path': '/shadow-ws', 'mux': False}, 'udp': True}
+# domain=cdn.appsflyer.com
+
+# SGOVH-FF_SS_pvwt-SG2OVH_GlobalSSH
+  - {'name': '🍩SGOVH-FF_SS_pvwt-SG2OVH_GlobalSSH', 'type': 'ss', 'server': 'ss-ovh-sg02.globalssh.xyz', 'port': 443, 'password': 'GlobalSSHPremiumShadow==:Yg8c8IlBpcIM7UmKWktukQ==', 'cipher': '2022-blake3-aes-128-gcm', 'plugin': 'v2ray-plugin', 'plugin-opts': {'mode': 'websocket', 'tls': True, 'skip-cert-verify': True, 'host': 'www.freefiremobile.com', 'path': '/shadow-ws', 'mux': False}, 'udp': True}
+# domain=
 
 proxy-groups:
-  - name: 🐟
-    type: url-test
-    strategy: round-robin
-    disable-udp: false
+  - name: 🍩
+    type: select
     proxies:
-      - "🍩SG-FF_SS_pot-SG1_GreenSSH"
+      - 🍩SGOVH-BYU_SS_pvwtr-SG2OVH_GlobalSSH
+      - 🍩SGOVH-FF_SS_pvwt-SG2OVH_GlobalSSH
+      - DIRECT
+      - REJECT
+    url: http://www.gstatic.com/generate_204
+    interval: 100
+
+  - name: 🐟
+    type: select
+    proxies:
+      - 🍩
+      - DIRECT
+      - REJECT
     url: http://www.gstatic.com/generate_204
     interval: 100
 
   - name: ♻️
-    type: url-test
-    strategy: round-robin
-    disable-udp: false
+    type: select
     proxies:
-      - "🍩SG-FF_SS_pot-SG1_GreenSSH"
+      - 🍩
+      - DIRECT
+      - REJECT
     url: http://www.gstatic.com/generate_204
     interval: 100
 
@@ -189,6 +226,10 @@ proxy-groups:
     type: select
     proxies:
       - REJECT
+      - 🍩
+      - DIRECT
+    url: http://www.gstatic.com/generate_204
+    interval: 100
 
 rules:
   - IP-CIDR,0.0.0.0/8,DIRECT,no-resolve
@@ -214,21 +255,53 @@ rules:
   - IP-CIDR,104.192.109.105/32,♻️
   - DOMAIN-KEYWORD,duckduckgo.,🛑
   - DOMAIN,api.sheeppark.com,♻️
-  - DOMAIN,p.sheeppark.com,♻️
+  - DOMAIN,2dokpo-cdn-settings.appsflyersdk.com,♻️
+  - DOMAIN,api.bytegle.site,🛑
+  - DOMAIN,gdl.bytegle.tech,🛑
+  - DOMAIN,api16-access-sg.pangle.io,♻️ #🛑
   - DOMAIN,graph.facebook.com,♻️
-  - DOMAIN,2.android.pool.ntp.org,♻️
+  - DOMAIN,ms.applovin.com,♻️
+  - DOMAIN,sf16-static.i18n-pglstatp.com,♻️
+  - DOMAIN,analytics-tcp.mintegral.net,♻️
+  - DOMAIN,playable.mintegral.com,♻️
+  - DOMAIN,configure-tcp-android.rayjump.com,♻️
+  - DOMAIN,p.sheeppark.com,♻️
+  - DOMAIN,configure.rayjump.com,♻️
+  - DOMAIN,analytics.rayjump.com,♻️
+  - DOMAIN,se-new-cdn-ap-northeast-2c-hb.rayjump.com,♻️
+  - DOMAIN,se-new-cdn-ap-northeast-2a-hb.rayjump.com,♻️
+  - DOMAIN,cdn-adn-gcp.rayjump.com,♻️
+  - DOMAIN,hybird.rayjump.com,♻️
+  - DOMAIN,play.rayjump.com,🛑
+  - DOMAIN,sg01-cdn.rayjump.com,🛑
+  - DOMAIN,net-se-cdn.rayjump.com,♻️
+  - DOMAIN,net.rayjump.com,♻️ # LOW
+  - DOMAIN,mtg-h5.rayjump.com,🛑
+  - DOMAIN,cdn-adn-https.rayjump.com,🛑
+  - DOMAIN,2.android.pool.ntp.org,🛑 # 1♻️
   - DOMAIN,iotapi.adups.com,🛑
+  - DOMAIN,geller-pa.googleapis.com,♻️
+  - DOMAIN,storage.googleapis.com,♻️
+  - DOMAIN,cloudconfig.googleapis.com,♻️
   - DOMAIN,footprints-pa.googleapis.com,♻️
   - DOMAIN,android.clients.google.com,♻️
   - DOMAIN,notifications-pa.googleapis.com,♻️
+  - DOMAIN,locationhistory-pa.googleapis.com,♻️
+  - DOMAIN,prod-lt-playstoregatewayadapter-pa.googleapis.com,♻️
+  - DOMAIN,voledevice-pa.googleapis.com,♻️
   - DOMAIN,www.googleapis.com,♻️
+  - DOMAIN,fonts.googleapis.com,♻️
+  - DOMAIN,play-fe.googleapis.com,♻️
   - DOMAIN,android.googleapis.com,♻️
   - DOMAIN,www.google.com,♻️
   - DOMAIN,www.gstatic.com,♻️
+  - DOMAIN,connectivitycheck.gstatic.com,♻️
   - DOMAIN,csi.gstatic.com,♻️
   - DOMAIN,fonts.gstatic.com,♻️
   - DOMAIN,img.youtube.com,♻️
   - DOMAIN-KEYWORD,.googlevideo.com,♻️
+  - DOMAIN-KEYWORD,.gvt1.com,♻️
+  - DOMAIN,beacons.gcp.gvt2.com,♻️
   - DOMAIN,phonedeviceverification-pa.googleapis.com,♻️
   - DOMAIN,play.googleapis.com,♻️
   - DOMAIN,secure.insightexpressai.com,♻️
@@ -244,6 +317,7 @@ rules:
   - DOMAIN,sdk.api.kaffnet.com,♻️
   - DOMAIN,w.lazybumblebee.com,♻️
   - DOMAIN,i.sng.link,♻️
+  - DOMAIN,i.ytimg.com,♻️
   - DOMAIN,impression.link,♻️
   - DOMAIN,events-sgp.bidder.kayzen.io,♻️
   - DOMAIN,events-ams.bidder.kayzen.io,♻️
@@ -260,7 +334,6 @@ rules:
   - DOMAIN,impression.appsflyer.com,♻️
   - DOMAIN,2dokpo-launches.appsflyersdk.com,♻️
   - DOMAIN,2dokpo-inapps.appsflyersdk.com,♻️
-  - DOMAIN,sf16-static.i18n-pglstatp.com,♻️
   - DOMAIN,tnc16-useast1a.byteoversea.com,♻️
   - DOMAIN,mssdk-sg-bu.byteoversea.com,♻️
   - DOMAIN,tnc16-alisg.byteoversea.com,♻️
@@ -287,14 +360,14 @@ rules:
   - DOMAIN,sdk.s.360.cn,♻️
   - DOMAIN,psp.cloud.360shouji.com,♻️
   - DOMAIN,default-cluster.push.cloud-en.360shouji.com,♻️
-  - DOMAIN,pms.ms-en.360os.com,🛑
-  - DOMAIN,ddns.360os.com,🛑
+  - DOMAIN,confreport.360os.com,♻️
+  - DOMAIN,pms.ms-en.360os.com,♻️
+  - DOMAIN,ddns.360os.com,♻️
   - DOMAIN,hj.cloud.360os.com,🛑
   - DOMAIN,appupdate.cloud-en.360os.com,🛑
   - DOMAIN,xeye.cloud.360os.com,🛑
   - DOMAIN,sellout-en.qiku-cloud.com,🛑
   - DOMAIN,api-en.os.qiku.com,♻️
-  - DOMAIN,api16-access-sg.pangle.io,🛑
   - DOMAIN,api16-log-sg2.pangle.io,🛑 # HIGH
   - DOMAIN,onesoft.com.vn,🛑 # HIGH
   - DOMAIN,firebaseinstallations.googleapis.com,♻️
@@ -312,6 +385,7 @@ rules:
   - DOMAIN,cat.nl3.eu.criteo.com,♻️
   - DOMAIN,cat.va.us.criteo.com,♻️
   - DOMAIN,csm.us.criteo.net,♻️
+  - DOMAIN,rtb.sg1.as.criteo.com,♻️
   - DOMAIN,rtb.da.us.criteo.com,♻️
   - DOMAIN,imageproxy.us.criteo.net,♻️
   - DOMAIN,widget.va.us.criteo.com,♻️
@@ -366,6 +440,7 @@ rules:
   - DOMAIN,tpc.googlesyndication.com,♻️
   - DOMAIN,pagead2.googlesyndication.com,♻️
   - DOMAIN,pagead2.googleadservices.com,♻️
+  - DOMAIN,www.googletagservices.com,♻️
   - DOMAIN,www.googleadservices.com,♻️
   - DOMAIN,encrypted-tbn3.gstatic.com,♻️
   - DOMAIN,encrypted-tbn1.gstatic.com,♻️
@@ -373,6 +448,8 @@ rules:
   - DOMAIN,cm.g.doubleclick.net,♻️
   - DOMAIN,googleads4.g.doubleclick.net,♻️
   - DOMAIN,googleads.g.doubleclick.net,♻️
+  - DOMAIN,lh3.googleusercontent.com,♻️
+  - DOMAIN,play-lh.googleusercontent.com,♻️
   - DOMAIN,android.apis.google.com,♻️
   - DOMAIN,alt6-mtalk.google.com,♻️
   - DOMAIN,mtalk.google.com,♻️
@@ -382,9 +459,9 @@ rules:
   - DOMAIN,creative.bidease.com,♻️
   - DOMAIN,dc.holalauncher.com,🛑
   - DOMAIN,v.holalauncher.com,🛑
-  - DOMAIN,assets.mintegral.com,🛑
+  - DOMAIN,assets.mintegral.com,♻️
   - DOMAIN,pok.mintegral.net,🛑
-  - DOMAIN,analytics-tcp.mintegral.net,🛑
+  - DOMAIN,analytics.mintegral.net,🛑
   - DOMAIN,d.applvn.com,🛑
   - DOMAIN,a.applvn.com,🛑
   - DOMAIN,ms.applvn.com,♻️
@@ -393,47 +470,38 @@ rules:
   - DOMAIN,assets.applovin.com,♻️
   - DOMAIN,d.applovin.com,🛑
   - DOMAIN,ms4.applovin.com,♻️
-  - DOMAIN,ms.applovin.com,♻️
   - DOMAIN,prod-bid.applovin.com,🛑
   - DOMAIN,prod-a4.applovin.com,♻️
   - DOMAIN,res1.applovin.com,🛑
   - DOMAIN,img.applovin.com,🛑
   - DOMAIN,stage-a4.applovin.com,🛑
-  - DOMAIN,stage-mediate-events.applovin.com,🛑
+  - DOMAIN,stage-mediate-events.applovin.com,♻️ # 🛑
   - DOMAIN,stage-a-events.applovin.com,♻️
   - DOMAIN,prod-mediate-events.applovin.com,♻️
+  - DOMAIN,prod-a.applovin.com,♻️
+  - DOMAIN,a.applovin.com,♻️
   - DOMAIN,prod-a-events.applovin.com,♻️
   - DOMAIN,a4.applovin.com,🛑
   - DOMAIN,rt.applovin.com,♻️
-  - DOMAIN,check-tcp.rayjump.com,🛑
-  - DOMAIN,lazy-tcp.rayjump.com,🛑
-  - DOMAIN,policy-tcp.rayjump.com,🛑
+  - DOMAIN,check-tcp.rayjump.com,♻️
+  - DOMAIN,lazy-tcp.rayjump.com,♻️
+  - DOMAIN,policy-tcp.rayjump.com,♻️
   - DOMAIN,tknet.rayjump.com,🛑
   - DOMAIN,tknet-cdn.rayjump.com,🛑
-  - DOMAIN,hybird.rayjump.com,🛑
-  - DOMAIN,play.rayjump.com,🛑
-  - DOMAIN,sg01-cdn.rayjump.com,🛑
   - DOMAIN,sg01.rayjump.com,🛑
   - DOMAIN,ir-new-cdn-eu-west-1b-hb.rayjump.com,♻️
   - DOMAIN,ir-new-cdn-eu-west-1a-hb.rayjump.com,♻️
   - DOMAIN,ir-new-cdn-eu-west-1c-hb.rayjump.com,♻️
-  - DOMAIN,configure-tcp-android.rayjump.com,🛑
   - DOMAIN,configure-tcp.rayjump.com,🛑
-  - DOMAIN,se-new-cdn-ap-northeast-2c-hb.rayjump,🛑
   - DOMAIN,vg-aws-cdn-us-east-1b-hb.rayjump.com,🛑
   - DOMAIN,vg-aws-cdn-us-east-1a-hb.rayjump.com,🛑
   - DOMAIN,vg-new-hb.rayjump.com,🛑 # HIGH-GAME
-  - DOMAIN,se-new-cdn-ap-northeast-2c-hb.rayjump.com,🛑
-  - DOMAIN,se-new-cdn-ap-northeast-2a-hb.rayjump.com,🛑
-  - DOMAIN,cdn-adn-gcp.rayjump.com,🛑
   - DOMAIN,de01.rayjump.com,🛑
   - DOMAIN,us01.rayjump.com,🛑
   - DOMAIN,net-ir-cdn.rayjump.com,🛑
-  - DOMAIN,net-se-cdn.rayjump.com,♻️
   - DOMAIN,net-vg.rayjump.com,🛑
   - DOMAIN,net-sg-cdn.rayjump.com,🛑
   - DOMAIN,us01-cdn.rayjump.com,🛑
-  - DOMAIN,adx-tk.rayjump.com,♻️
-  - DOMAIN,configure-tcp-android.rayjump.com,🛑
-  - DOMAIN,net.rayjump.com,🛑 # LOW
+  - DOMAIN,adx-tk.rayjump.com,🛑 # ♻️
+  - DOMAIN,sg01.dspunion.com,♻️
   - MATCH,🐟
