@@ -5,12 +5,12 @@ proxies:
 # SG-BYU_SS_pot-SG1MBC_GlobalSSH
   - {'name': '🍩', 'type': 'ss', 'server': 'mbc-sg01.ipss.xyz', 'port': 1443, 'password': 'sobatgs', 'cipher': 'aes-128-gcm', 'plugin': 'obfs', 'plugin-opts': {'mode': 'tls', 'tls': True, 'host': 'space.byu.id'}, 'udp': True}
 
+# SGOVH-BYU_SS_pvwtr-SG1OVH_GlobalSSH
+  - {'name': '🍩SGOVH-BYU_SS_pvwtr-SG1OVH_GlobalSSH', 'type': 'ss', 'server': 'space.byu.id', 'port': 443, 'password': 'GlobalSSHPremiumShadow==:iOIPFTzvmBBby0oBkaUgZQ==', 'cipher': '2022-blake3-aes-128-gcm', 'plugin': 'v2ray-plugin', 'plugin-opts': {'mode': 'websocket', 'tls': True, 'skip-cert-verify': True, 'host': 'ss-ovh-sg01.globalssh.xyz', 'path': '/shadow-ws', 'mux': False}, 'udp': True}
+# domain=cdn.appsflyer.com
 
-# SGOVH-BYU_SS_pvwtr-SG2OVH_GlobalSSH
-  - {'name': '🍩', 'type': 'ss', 'server': 'space.byu.id', 'port': 443, 'password': 'GlobalSSHPremiumShadow==:Yg8c8IlBpcIM7UmKWktukQ==', 'cipher': '2022-blake3-aes-128-gcm', 'plugin': 'v2ray-plugin', 'plugin-opts': {'mode': 'websocket', 'tls': True, 'skip-cert-verify': True, 'host': 'ss-ovh-sg02.globalssh.xyz', 'path': '/shadow-ws', 'mux': False}, 'udp': True}
-
-# SG-BYU_SS_pvwtr-SG1_GlobalSSH
-  - {'name': '🍩', 'type': 'ss', 'server': 'space.byu.id', 'port': 443, 'password': 'GlobalSSHPremiumShadow==:b9r6X1SBzpxlL/FgTKGIEQ==', 'cipher': '2022-blake3-aes-128-gcm', 'plugin': 'v2ray-plugin', 'plugin-opts': {'mode': 'websocket', 'tls': True, 'skip-cert-verify': True, 'host': 'ss-ovh-sg01.globalssh.xyz', 'path': '/shadow-ws', 'mux': False}, 'udp': True}
+# SGOVH-FF_SS_pvwt-SG1OVH_GlobalSSH
+  - {'name': '🍩SGOVH-FF_SS_pvwt-SG1OVH_GlobalSSH', 'type': 'ss', 'server': 'ss-ovh-sg02.globalssh.xyz', 'port': 443, 'password': 'GlobalSSHPremiumShadow==:iOIPFTzvmBBby0oBkaUgZQ==', 'cipher': '2022-blake3-aes-128-gcm', 'plugin': 'v2ray-plugin', 'plugin-opts': {'mode': 'websocket', 'tls': True, 'skip-cert-verify': True, 'host': 'www.freefiremobile.com', 'path': '/shadow-ws', 'mux': False}, 'udp': True}
 
 # SG-BYU_VM_pnwtr-SG2_SSHOcean
   - {'name': '🍩', 'type': 'vmess', 'server': 'space.byu.id', 'port': 443, 'uuid': 'e4ded580-8c14-469e-9827-5b2181521b72', 'alterId': '0', 'cipher': 'auto', 'tls': True, 'skip-cert-verify': True, 'servername': 'sg2.xv2ray.net', 'network': 'ws', 'ws-opts': {'path': '/vmess', 'headers': {'Host': 'sg2.xv2ray.net'}, 'mux': False}, 'udp': True}
