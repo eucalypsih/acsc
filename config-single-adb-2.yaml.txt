@@ -11,10 +11,15 @@ external-controller: 0.0.0.0:9090
 secret: ""
 bind-address: "*"
 unified-delay: true
+# tcp-concurrent: true
+# enable-process: true
+# find-process-mode: always
+# global-client-fingerprint: crhrome
 profile:
   store-selected: true
   store-fake-ip: true
   store-fakeip: true
+  tracing: false
 hosts:
   'mtalk.google.com': 108.177.125.188
   'dl.google.com': 180.163.151.161
@@ -22,11 +27,36 @@ hosts:
 #  'space.byu.id': 162.159.128.79 # 162.159.138.78
   'dns.twnic.tw': 101.101.101.101
   'cloudflare-dns.com': 104.16.248.249 # 104.16.249.249
+
+sniffer:
+  enable: true
+  sniffing:
+    - http
+    - tls
+
+tun:
+  enable: true
+  stack: system
+  dns-hijack:
+    - 0.0.0.0:53
+    - any:53
+    - tcp://any:53
+  auto-detect-interface: true
+  auto-route: true
+  strict-route: true
+
 dns:
 #  enable: true
   enabled: true
   ipv6: false
+  prefer-h3: true
   use-hosts: true
+#  default-nameserver:
+#    - 223.5.5.5
+#    - 119.29.29.29
+#    - 8.8.8.8
+#    - 1.1.1.1
+#    - 112.215.203.254
   enhanced-mode: fake-ip
   listen: 127.0.0.1:7874
   nameserver:
@@ -44,12 +74,7 @@ dns:
 #    - 8.8.4.4
     - https://cloudflare-dns.com/dns-query
 #    - 112.215.203.254
-#  default-nameserver:
-#    - 223.5.5.5
-#    - 119.29.29.29
-#    - 8.8.8.8
-#    - 1.1.1.1
-#    - 112.215.203.254
+
 #  nameserver:
 #    - 1.1.1.1
 #    - 223.5.5.5
@@ -78,22 +103,27 @@ dns:
       - 224.0.0.0/4
       - 240.0.0.0/4
       - 255.255.255.255/32
+      - '::1/128'
+      - '64:ff9b:1::/48'
+      - 'fc00::/7'
+      - 'fe80::/10'
     domain:
-      - 'se-new-cdn-ap-northeast-2c-hb.rayjump.com'
-      - 'se-new-cdn-ap-northeast-2a-hb.rayjump.com'
+      - +.google.com
+      - +.facebook.com
+      - +.gvt1.com
       - '+.*'
 #  default-nameserver:
 #    - 1.1.1.1
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
-    - "*.lan"
-    - "*.localdomain"
-    - "*.example"
-    - "*.invalid"
-    - "*.localhost"
-    - "*.test"
-    - "*.local"
-    - "*.home.arpa"
+    - "+.lan" # - "*.lan"
+    - "+.localdomain" # - "*.localdomain"
+    - "+.example" # - "*.example"
+    - "+.invalid" # - "*.invalid"
+    - "+.localhost" # - "*.localhost"
+    - "+.test" # - "*.test"
+    - "+.local" # - "*.local"
+    - "+.home.arpa" # - "*.home.arpa"
     - time.*.com
     - time.*.gov
     - time.*.edu.cn
@@ -179,6 +209,31 @@ dns:
     - "*.mcdn.bilivideo.cn"
     - +.media.dssott.com
 
+cfw-bypass:
+  - qq.com
+  - localhost
+  - 127.*
+  - 10.*
+  - 172.16.*
+  - 172.17.*
+  - 172.18.*
+  - 172.19.*
+  - 172.20.*
+  - 172.21.*
+  - 172.22.*
+  - 172.23.*
+  - 172.24.*
+  - 172.25.*
+  - 172.26.*
+  - 172.27.*
+  - 172.28.*
+  - 172.29.*
+  - 172.30.*
+  - 172.31.*
+  - 192.168.*
+  - <local>
+cfw-latency-timeout: 5000
+
 proxies:
 #  - {'name': '🍩SG-FF_SS_pot-SG1_GreenSSH', 'type': 'ss', 'server': 'sg01.proxysocks.xyz', 'port': 1443, 'password': 'OTlmY', 'cipher': 'chacha20-ietf-poly1305', 'plugin': 'obfs', 'plugin-opts': {'mode': 'tls', 'tls': True,'host': 'space.byu.id'}, 'udp': true}
 # domain=www.freefiremobile.com
@@ -186,11 +241,14 @@ proxies:
 #  - {'name': '🍩', 'type': 'vmess', 'server': 'sg2.xv2ray.net', 'port': 443, 'uuid': 'e4ded580-8c14-469e-9827-5b2181521b72', 'alterId': '0', 'cipher': 'auto', 'tls': True, 'skip-cert-verify': True, 'servername': 'sg2.xv2ray.net', 'network': 'ws', 'ws-opts': {'path': '/vmess', 'headers': {'Host': 'www.freefiremobile.com'}, 'mux': False}, 'udp': True}
 
 # SGOVH-BYU_SS_pvwtr-SG2OVH_GlobalSSH
-  - {'name': '🍩SGOVH-BYU_SS_pvwtr-SG2OVH_GlobalSSH', 'type': 'ss', 'server': 'space.byu.id', 'port': 443, 'password': 'GlobalSSHPremiumShadow==:Yg8c8IlBpcIM7UmKWktukQ==', 'cipher': '2022-blake3-aes-128-gcm', 'plugin': 'v2ray-plugin', 'plugin-opts': {'mode': 'websocket', 'tls': True, 'skip-cert-verify': True, 'host': 'ss-ovh-sg02.globalssh.xyz', 'path': '/shadow-ws', 'mux': False}, 'udp': True}
-# domain=cdn.appsflyer.com
+  - {'name': '🍩SGOVH-BYU_SS_pvwtr-SG2OVH_GlobalSSH', 'type': 'ss', 'server': 'space.byu.id', 'port': 443, 'password': 'GlobalSSHPremiumShadow==:iOIPFTzvmBBby0oBkaUgZQ==', 'cipher': '2022-blake3-aes-128-gcm', 'plugin': 'v2ray-plugin', 'plugin-opts': {'mode': 'websocket', 'tls': True, 'skip-cert-verify': True, 'host': 'ss-ovh-sg01.globalssh.xyz', 'path': '/shadow-ws', 'mux': False}, 'udp': True}
+  - {'name': '🍩SGOVH-BYU_SS_pvwtr-SG1OVH_GlobalSSH2', 'type': 'ss', 'server': 'space.byu.id', 'port': 443, 'password': 'GlobalSSHPremiumShadow==:ZxcHw2eAB+8Y0zKlNyYApQ==', 'cipher': '2022-blake3-aes-128-gcm', 'plugin': 'v2ray-plugin', 'plugin-opts': {'mode': 'websocket', 'tls': True, 'skip-cert-verify': True, 'host': 'ss-ovh-sg01.globalssh.xyz', 'path': '/shadow-ws', 'mux': False}, 'udp': True}
+# d=cdn.appsflyer.com
+# d=api.ovo.id
+# d=space.byu.id
 
 # SGOVH-FF_SS_pvwt-SG2OVH_GlobalSSH
-  - {'name': '🍩SGOVH-FF_SS_pvwt-SG2OVH_GlobalSSH', 'type': 'ss', 'server': 'ss-ovh-sg02.globalssh.xyz', 'port': 443, 'password': 'GlobalSSHPremiumShadow==:Yg8c8IlBpcIM7UmKWktukQ==', 'cipher': '2022-blake3-aes-128-gcm', 'plugin': 'v2ray-plugin', 'plugin-opts': {'mode': 'websocket', 'tls': True, 'skip-cert-verify': True, 'host': 'www.freefiremobile.com', 'path': '/shadow-ws', 'mux': False}, 'udp': True}
+  - {'name': '🍩SGOVH-FF_SS_pvwt-SG2OVH_GlobalSSH', 'type': 'ss', 'server': 'ss-ovh-sg02.globalssh.xyz', 'port': 443, 'password': 'GlobalSSHPremiumShadow==:iOIPFTzvmBBby0oBkaUgZQ==', 'cipher': '2022-blake3-aes-128-gcm', 'plugin': 'v2ray-plugin', 'plugin-opts': {'mode': 'websocket', 'tls': True, 'skip-cert-verify': True, 'host': 'www.freefiremobile.com', 'path': '/shadow-ws', 'mux': False}, 'udp': True}
 # domain=
 
 proxy-groups:
@@ -198,7 +256,8 @@ proxy-groups:
     type: select
     proxies:
       - 🍩SGOVH-BYU_SS_pvwtr-SG2OVH_GlobalSSH
-      - 🍩SGOVH-FF_SS_pvwt-SG2OVH_GlobalSSH
+      - 🍩SGOVH-BYU_SS_pvwtr-SG1OVH_GlobalSSH2
+      - '🍩SGOVH-FF_SS_pvwt-SG2OVH_GlobalSSH'
       - DIRECT
       - REJECT
     url: http://www.gstatic.com/generate_204
@@ -232,6 +291,7 @@ proxy-groups:
     interval: 100
 
 rules:
+  - IP-CIDR,10.10.34.0/24,♻️
   - IP-CIDR,0.0.0.0/8,♻️,no-resolve
   - IP-CIDR,10.0.0.0/8,♻️,no-resolve
   - IP-CIDR,100.64.0.0/10,♻️,no-resolve
@@ -264,6 +324,7 @@ rules:
   - DOMAIN,sf16-static.i18n-pglstatp.com,♻️
   - DOMAIN,analytics-tcp.mintegral.net,🛑
   - DOMAIN,playable.mintegral.com,🛑
+  - DOMAIN,newplayable.mintegral.com,🛑
   - DOMAIN,configure-tcp-android.rayjump.com,🛑
   - DOMAIN,p.sheeppark.com,♻️
   - DOMAIN,configure.rayjump.com,🛑
@@ -271,14 +332,16 @@ rules:
   - DOMAIN,se-new-cdn-ap-northeast-2c-hb.rayjump.com,🛑
   - DOMAIN,se-new-cdn-ap-northeast-2a-hb.rayjump.com,🛑
   - DOMAIN,cdn-adn-gcp.rayjump.com,🛑
-  - DOMAIN,hybird.rayjump.com,♻️
+  - DOMAIN,hybird.rayjump.com,🛑
   - DOMAIN,play.rayjump.com,🛑
   - DOMAIN,sg01-cdn.rayjump.com,🛑
   - DOMAIN,net-se-cdn.rayjump.com,♻️
   - DOMAIN,net.rayjump.com,🛑 # LOW
   - DOMAIN,mtg-h5.rayjump.com,♻️
+  - DOMAIN,de01-cdn.rayjump.com,♻️
   - DOMAIN,cdn-adn-https.rayjump.com,🛑
   - DOMAIN,2.android.pool.ntp.org,🛑 # 1♻️
+  - DOMAIN,rumcdn.geoedge.be,♻️
   - DOMAIN,iotapi.adups.com,♻️
   - DOMAIN,geller-pa.googleapis.com,♻️
   - DOMAIN,storage.googleapis.com,♻️
@@ -298,6 +361,7 @@ rules:
   - DOMAIN,connectivitycheck.gstatic.com,♻️
   - DOMAIN,csi.gstatic.com,♻️
   - DOMAIN,fonts.gstatic.com,♻️
+  - DOMAIN,toko9000.com,♻️
   - DOMAIN,img.youtube.com,♻️
   - DOMAIN-KEYWORD,.googlevideo.com,♻️
   - DOMAIN-KEYWORD,.gvt1.com,♻️
@@ -313,7 +377,7 @@ rules:
   - DOMAIN,s2s.adjust.com,♻️
   - DOMAIN,app.adjust.io,♻️
   - DOMAIN,abroad.apilocate.amap.com,♻️
-  - DOMAIN,appodealx-us.appgrowth.com,🛑 # HIGH-GAME
+  - DOMAIN,appodealx-us.appgrowth.com,♻️ # HIGH-GAME
   - DOMAIN,sdk.api.kaffnet.com,♻️
   - DOMAIN,w.lazybumblebee.com,♻️
   - DOMAIN,i.sng.link,♻️
@@ -322,10 +386,11 @@ rules:
   - DOMAIN,events-sgp.bidder.kayzen.io,♻️
   - DOMAIN,events-ams.bidder.kayzen.io,♻️
   - DOMAIN,app-measurement.com,♻️
+  - DOMAIN,region1.app-measurement.com,♻️
   - DOMAIN,g.s.360.cn,♻️
   - DOMAIN,tps.doubleverify.com,♻️
   - DOMAIN,adclick.startappservice.com,♻️
-  - DOMAIN,images.startappservice.com,🛑
+  - DOMAIN,images.startappservice.com,♻️
   - DOMAIN,adimpression.startappservice.com,♻️
   - DOMAIN,imp.control.kochava.com,♻️
   - DOMAIN,analytics.tresensa.com,♻️
@@ -376,6 +441,8 @@ rules:
   - DOMAIN,jnn-pa.googleapis.com,♻️
   - DOMAIN,nearbysharing-pa.googleapis.com,♻️
   - DOMAIN,safebrowsing.googleapis.com,♻️
+  - DOMAIN,igapromomanager-pa.googleapis.com,♻️
+  - DOMAIN,android-safebrowsing.google.com,♻️
   - DOMAIN,vst.c.appier.net,♻️
   - DOMAIN,ad.appier.net,♻️
   - DOMAIN,ipds.adrta.com,♻️
@@ -383,6 +450,7 @@ rules:
   - DOMAIN,widget.nl3.eu.criteo.com,♻️
   - DOMAIN,cat.sg1.as.criteo.com,♻️ # IMAGE-SHOP
   - DOMAIN,cat.nl3.eu.criteo.com,♻️
+  - DOMAIN,rtb.nl3.eu.criteo.com,♻️
   - DOMAIN,cat.va.us.criteo.com,♻️
   - DOMAIN,csm.us.criteo.net,♻️
   - DOMAIN,rtb.sg1.as.criteo.com,♻️
@@ -411,6 +479,7 @@ rules:
   - DOMAIN,events.mz.unity3d.com,🛑
   - DOMAIN,auction-load.unityads.unity3d.com,🛑
   - DOMAIN,configv2.unityads.unity3d.com,🛑
+  - DOMAIN,httpkafka.unityads.unity3d.com,🛑
   - DOMAIN,s0.2mdn.net,♻️
   - DOMAIN,gcdn.2mdn.net,♻️
   - DOMAIN,sync-openx.ads.yieldmo.com,♻️
@@ -433,6 +502,9 @@ rules:
   - DOMAIN,use.trk.svr-algorix.com,♻️
   - DOMAIN,rtb.mfadsrvr.com,♻️
   - DOMAIN,match.adsrvr.org,♻️
+  - DOMAIN,insight.adsrvr.org,♻️
+  - DOMAIN,v.adsrvr.org,♻️
+  - DOMAIN,yt3.ggpht.com,♻️
   - DOMAIN,vae-bid.adsrvr.org,♻️
   - DOMAIN,de1-bid.adsrvr.org,♻️
   - DOMAIN,usw-ca2.adsrvr.org,♻️
@@ -471,37 +543,39 @@ rules:
   - DOMAIN,d.applovin.com,🛑
   - DOMAIN,ms4.applovin.com,♻️
   - DOMAIN,prod-bid.applovin.com,🛑
-  - DOMAIN,prod-a4.applovin.com,♻️
-  - DOMAIN,res1.applovin.com,🛑
-  - DOMAIN,img.applovin.com,🛑
+  - DOMAIN,prod-a4.applovin.com,🛑
+  - DOMAIN,res1.applovin.com,♻️
+  - DOMAIN,img.applovin.com,♻️
   - DOMAIN,stage-a4.applovin.com,🛑
-  - DOMAIN,stage-mediate-events.applovin.com,♻️ # 🛑
-  - DOMAIN,stage-a-events.applovin.com,♻️
+  - DOMAIN,stage-mediate-events.applovin.com,🛑
+  - DOMAIN,stage-a-events.applovin.com,🛑
   - DOMAIN,prod-mediate-events.applovin.com,♻️
-  - DOMAIN,prod-a.applovin.com,♻️
-  - DOMAIN,a.applovin.com,♻️
+  - DOMAIN,prod-a.applovin.com,🛑
+  - DOMAIN,a.applovin.com,🛑
   - DOMAIN,prod-a-events.applovin.com,♻️
-  - DOMAIN,a4.applovin.com,🛑
+  - DOMAIN,a4.applovin.com,♻️
   - DOMAIN,rt.applovin.com,♻️
   - DOMAIN,check-tcp.rayjump.com,♻️
   - DOMAIN,lazy-tcp.rayjump.com,♻️
   - DOMAIN,policy-tcp.rayjump.com,♻️
-  - DOMAIN,tknet.rayjump.com,🛑
-  - DOMAIN,tknet-cdn.rayjump.com,🛑
-  - DOMAIN,sg01.rayjump.com,♻️
-  - DOMAIN,ir-new-cdn-eu-west-1b-hb.rayjump.com,♻️
-  - DOMAIN,ir-new-cdn-eu-west-1a-hb.rayjump.com,♻️
-  - DOMAIN,ir-new-cdn-eu-west-1c-hb.rayjump.com,♻️
-  - DOMAIN,configure-tcp.rayjump.com,🛑
+  - DOMAIN,tknet.rayjump.com,♻️
+  - DOMAIN,tknet-cdn.rayjump.com,♻️
+  - DOMAIN,sg01.rayjump.com,🛑
+  - DOMAIN,ir-new-cdn-eu-west-1b-hb.rayjump.com,🛑
+  - DOMAIN,ir-new-cdn-eu-west-1a-hb.rayjump.com,🛑
+  - DOMAIN,ir-new-cdn-eu-west-1c-hb.rayjump.com,🛑
+  - DOMAIN,configure-tcp.rayjump.com,♻️
   - DOMAIN,vg-aws-cdn-us-east-1b-hb.rayjump.com,🛑
   - DOMAIN,vg-aws-cdn-us-east-1a-hb.rayjump.com,🛑
   - DOMAIN,vg-new-hb.rayjump.com,🛑 # HIGH-GAME
-  - DOMAIN,de01.rayjump.com,♻️
-  - DOMAIN,us01.rayjump.com,♻️
+  - DOMAIN,de01.rayjump.com,🛑
+  - DOMAIN,us01.rayjump.com,🛑
   - DOMAIN,net-ir-cdn.rayjump.com,🛑
   - DOMAIN,net-vg.rayjump.com,🛑
   - DOMAIN,net-sg-cdn.rayjump.com,🛑
   - DOMAIN,us01-cdn.rayjump.com,🛑
-  - DOMAIN,adx-tk.rayjump.com,🛑 # ♻️
+  - DOMAIN,adx-tk.rayjump.com,♻️ # ♻️
   - DOMAIN,sg01.dspunion.com,♻️
+  - DOMAIN,us01.dspunion.com,♻️
+  - GEOIP,CN,DIRECT
   - MATCH,🐟
