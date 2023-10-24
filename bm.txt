@@ -1,0 +1,21 @@
+
+tttapa/docker-arm-cross-toolchain: Modern GCC cross-compilation toolchains for Raspberry Pi
+https://github.com/tttapa/docker-arm-cross-toolchain
+
+Cross-Compiling GCC Toolchain for ARM Cortex-M Processors
+https://www.linkedin.com/pulse/cross-compiling-gcc-toolchain-arm-cortex-m-processors-ijaz-ahmad
+
+Compiling native GCC for arm using cross-compiler
+https://www.tutorialspoint.com/compiling-native-gcc-for-arm-using-cross-compiler
+
+apritzel/cross: GCC Crosscompiler build scripts and instructions
+https://github.com/apritzel/cross
+
+narke/gcc-cross-compiler: A script to cross-compile GCC toolchain for various target architectures.
+https://github.com/narke/gcc-cross-compiler
+
+How to Build a GCC Cross-Compiler
+https://preshing.com/20141119/how-to-build-a-gcc-cross-compiler/
+
+RTOS dan OS – Keuntungan dan Kerugian|S1 Sistem Komputer S.Kom
+https://sistem-komputer-s1.stekom.ac.id/informasi/baca/RTOS-dan-OS-Keuntungan-dan-Kerugian/da2f846adbbee9ca8b82cf3e36d283d8c9060bdd
