@@ -1,3 +1,11 @@
+Python urllib3 - accessing web resources via HTTP
+https://zetcode.com/python/urllib3/
+
+Hyperquery - The next-generation data notebook
+https://www.hyperquery.ai/?gad_source=1&gclid=EAIaIQobChMIsOD9uZuRggMV447CCB25PgRaEAAYAiAAEgI-PPD_BwE
+
+Python Online Compiler & Interpreter - Replit
+https://replit.com/languages/python3
 
 tttapa/docker-arm-cross-toolchain: Modern GCC cross-compilation toolchains for Raspberry Pi
 https://github.com/tttapa/docker-arm-cross-toolchain
